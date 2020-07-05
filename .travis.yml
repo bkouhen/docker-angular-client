@@ -9,3 +9,16 @@ before_install:
 script:
   - docker run bkouhen/docker-angular-client npm run test:ci
   - docker run bkouhen/docker-angular-client npm run e2e:ci
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-3"
+  app: "docker-angular-client"
+  env: "DockerAngularClient-env"
+  bucket_name: "elasticbeanstalk-eu-west-3-804229121763"
+  bucket_path: "docker-angular-client"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
