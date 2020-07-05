@@ -1,13 +1,19 @@
 FROM node:alpine
 
+RUN apk update \
+    && apk add chromium=81.0.4044.113-r0 \
+    && apk add chromium-chromedriver=81.0.4044.113-r0 \
+    && apk add openjdk11-jre-headless
+
+ENV CHROME_BIN /usr/bin/chromium-browser
+
 WORKDIR /usr/src/app
 
 COPY package.json .
 
-RUN npm install
+RUN npm install \
+    && npm cache clean --force
 
 COPY . .
 
-EXPOSE 4200
-
-CMD [ "npm", "run", "start"]
+CMD [ "npm", "run", "start:ci"]

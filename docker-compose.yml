@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  client:
-    image: client
+  web:
+    image: angular-client
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -12,11 +12,18 @@ services:
       - /usr/src/app/node_modules
       - .:/usr/src/app
   tests:
-    image: client
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
+    image: angular-client
+    depends_on:
+      - web
     volumes:
       - /usr/src/app/node_modules
       - .:/usr/src/app
-    command: ["npm", "run", "test"]
+    command: ["npm", "run", "test:ci"]
+  e2e:
+    image: angular-client
+    depends_on:
+      - web
+    volumes:
+      - /usr/src/app/node_modules
+      - .:/usr/src/app
+    command: ["npm", "run", "e2e:ci"]
