@@ -1,14 +1,14 @@
-sudo: required
+# sudo: required
 
-services:
-  - docker
+# services:
+#   - docker
 
-before_install:
-  - docker image build -t bkouhen/docker-angular-client -f Dockerfile.dev .
+# before_install:
+#   - docker image build -t bkouhen/docker-angular-client -f Dockerfile.dev .
 
-script:
-  - docker run bkouhen/docker-angular-client npm run test:ci
-  - docker run bkouhen/docker-angular-client npm run e2e:ci
+# script:
+#   - docker run bkouhen/docker-angular-client npm run test:ci
+#   - docker run bkouhen/docker-angular-client npm run e2e:ci
 
 deploy:
   provider: elasticbeanstalk
@@ -20,5 +20,4 @@ deploy:
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+  secret_access_key: $AWS_SECRET_KEY
