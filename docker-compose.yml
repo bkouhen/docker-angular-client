@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  client:
+    image: client
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 4200:4200
+    volumes:
+      - /usr/src/app/node_modules
+      - .:/usr/src/app
+  tests:
+    image: client
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules
+      - .:/usr/src/app
+    command: ["npm", "run", "test"]
