@@ -23,4 +23,4 @@ docker build -t bkouhen/docker-angular-client .
 docker push bkouhen/docker-angular-client:latest
 
 # update an AWS ECS service with the new image
-ecs-deploy -c $CLUSTER_NAME -n $SERVICE_NAME -i bkouhen/docker-angular-client:latest
+ecs-deploy -c $CLUSTER_NAME -n $SERVICE_NAME -r eu-west-3 -i bkouhen/docker-angular-client:latest
