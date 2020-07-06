@@ -1,3 +1,4 @@
+language: generic
 sudo: required
 
 services:
@@ -11,7 +12,7 @@ services:
 #   - docker run bkouhen/docker-angular-client-test npm run e2e:ci
 
 # after_success:
-  script:
+script:
   - docker image build -t bkouhen/docker-angular-client -f Dockerfile.prod .
   - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push bkouhen/docker-angular-client
