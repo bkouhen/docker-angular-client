@@ -4,6 +4,11 @@ sudo: required
 services:
   - docker
 
+script:
+  - docker image build -t bkouhen/docker-angular-client .
+  - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push bkouhen/docker-angular-client
+
 deploy:
   provider: script
   script: bash deploy.sh
